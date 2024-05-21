@@ -1,0 +1,41 @@
+<!--
+annotation.html - Display details about a user's annotation job
+Copyright (C) 2015-2023 Vas Vasiliadis <vas@uchicago.edu>
+University of Chicago
+-->
+
+{% extends "base.html" %}
+
+{% block title %}Annotation Details{% endblock %}
+
+{% block body %}
+    
+    {% include "header.html" %}
+
+    <div class="container">
+
+        <div class="page-header">
+            <h1>Annotation Details</h1>
+        </div>
+
+        <!-- DISPLAY ANNOTATION JOB DETAILS -->
+        <p>
+            Request ID: {{ job.job_id }}<br>
+            Request Time: {{ job.submit_time }}<br>
+	    VCF Input File: <a href="{{ i_url }}">{{ job.input_file_name }}</a><br>
+            Status: {{ job.job_status }}<br>
+	    {% if job.job_status == "COMPLETED" %}
+            Complete Time: {{ job.complete_time}}<br>
+	    Annotated Result File: <a href="{{ r_url }}">{{ word }}</a><br>
+            Annotation Log File: <a href="/annotations/{{ job.job_id }}/log">view</a><br>
+            {% endif %}
+        </p>
+    
+
+        <hr />
+
+        <a href="{{ url_for('annotations_list') }}">&larr; back to annotations list</a>
+
+    </div> <!-- container -->
+
+{% endblock %}
